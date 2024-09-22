@@ -4,7 +4,7 @@ const CONFIG = {
     BASE_URL: "https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/",
     ITEMS_PER_PAGE: 3,
     WHATSAPP_NUMBER: "5215640020305",
-    DATA_URL: "https://github.com/elitemassagemx/full/main/data.json"
+    DATA_URL: "https://raw.githubusercontent.com/elitemassagemx/full/main/data.json"
 };
 
 // Importar todos los scripts individuales
