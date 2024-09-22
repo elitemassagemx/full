@@ -1,0 +1,910 @@
+/* Estilos generales y variables */
+:root {
+  --primary-color: #D4AF37;
+  --secondary-color: #8B4513;
+  --text-color: #ffffff;
+  --background-color: #1a1a1a;
+  --item-background: #2a2a2a;
+  --header-background: #4c0026;
+  --main-blue: #082032;
+  --gold: #FFD700;
+  --spacing-unit: 8px;
+}
+
+/* Estas variables CSS definen los colores y espaciados principales del sitio.
+   Modificarlas afectará a todo el diseño de manera consistente. */
+
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Este selector universal resetea los márgenes y rellenos de todos los elementos,
+   y cambia el modelo de caja para que el padding no afecte al ancho total. */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: linear-gradient(270deg, var(--background-color), #2c2c2c, #3a3a3a);
+  background-size: 600% 600%;
+  animation: gradientTransition 15s ease infinite;
+  color: var(--text-color);
+  padding-bottom: 60px;
+}
+
+/* Estos estilos se aplican al cuerpo de la página, definiendo la fuente,
+   el tamaño de texto base, y un fondo con gradiente animado. */
+
+@keyframes gradientTransition {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+/* Esta animación crea el efecto de transición suave en el fondo del body. */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-unit);
+}
+
+/* La clase .container se usa para centrar y limitar el ancho del contenido. */
+
+/* Estilos para el encabezado */
+#sticky-header {
+  background-color: var(--header-background);
+  color: var(--text-color);
+  padding: var(--spacing-unit) 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Estos estilos hacen que el encabezado sea fijo en la parte superior de la página,
+   asegurando que siempre esté visible y accesible. */
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+}
+
+/* .header-top organiza los elementos del encabezado en una fila con espacio entre ellos. */
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: var(--spacing-unit);
+}
+
+/* Estos estilos configuran el logo y su contenedor. */
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+/* Estilos para los títulos principales. */
+
+/* Estilos para botones y enlaces */
+.btn-shine {
+  position: relative;
+  display: inline-block;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 6);
+  color: var(--text-color);
+  background: linear-gradient(to right, #4d4d4d 0, white 10%, #4d4d4d 20%);
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s infinite linear;
+  animation-fill-mode: forwards;
+  -webkit-text-size-adjust: none;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@keyframes shine {
+  0% { background-position: 0 }
+  60% { background-position: 180px }
+  100% { background-position: 180px }
+}
+
+/* Estos estilos crean un efecto de "brillo" en los botones y enlaces. */
+
+/* Estilos para secciones */
+.section {
+  padding: calc(var(--spacing-unit) * 6) 0;
+  margin-top: 60px; /* Para compensar el header fijo */
+}
+
+/* Espacio vertical para las secciones principales y margen superior para compensar el header fijo. */
+
+/* Estilos para grids de servicios y paquetes */
+.services-grid, .package-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-unit);
+  padding: 0 var(--spacing-unit);
+}
+
+/* Estas clases crean layouts de cuadrícula para servicios y paquetes.
+   El uso de auto-fit y minmax permite un diseño responsive sin media queries adicionales. */
+
+.service-item, .package-item {
+  background: linear-gradient(135deg, var(--item-background) 0%, #3a3a3a 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.service-item:hover, .package-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Estilos para cada item de servicio o paquete, incluyendo efectos hover.
+   El efecto de elevación al pasar el cursor mejora la interactividad. */
+
+.service-buttons, .package-item .button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.service-buttons button, .package-item button {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  flex: 1;
+  margin: 0 5px;
+  max-width: 150px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-buttons button:hover, .package-item button:hover {
+  background-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Estilos para los botones dentro de los items de servicio y paquete.
+   Los efectos de hover proporcionan retroalimentación visual al usuario. */
+
+/* Estilos para la barra fija inferior */
+.fixed-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--header-background);
+  padding: var(--spacing-unit) 0;
+  z-index: 1000;
+}
+
+.fixed-bar .main-nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fixed-bar .main-nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fixed-bar .nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.fixed-bar .nav-text {
+  font-size: 12px;
+}
+
+/* Estos estilos configuran la barra de navegación fija en la parte inferior.
+   Es especialmente útil para la navegación en dispositivos móviles. */
+
+/* Estilos para el selector de idioma */
+.language-selector {
+  position: relative;
+}
+
+.language-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--item-background);
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.language-options.show {
+  display: block;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.lang-option:hover {
+  background-color: var(--primary-color);
+}
+
+.lang-option img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Estos estilos configuran el selector de idioma y sus opciones.
+   Proporciona una experiencia de usuario intuitiva para cambiar el idioma del sitio. */
+
+/* Estilos para la sección de experiencias (checkboxes) */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.checkbox-wrapper {
+  margin: 10px;
+}
+
+.checkbox-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  border: 2px solid var(--primary-color);
+  background-color: var(--item-background);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.checkbox-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.checkbox-icon {
+  font-size: 48px;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.checkbox-label {
+  color: var(--text-color);
+  font-size: 14px;
+  text-align: center;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.checkbox-input:checked + .checkbox-tile {
+  background-color: var(--primary-color);
+}
+
+.checkbox-input:checked + .checkbox-tile .checkbox-icon,
+.checkbox-input:checked + .checkbox-tile .checkbox-label {
+  color: var(--background-color);
+}
+
+/* Estos estilos crean un diseño atractivo para los checkboxes de experiencias.
+   El input real está oculto y se estiliza el label para crear un aspecto personalizado. */
+
+/* Estilos para la galería con efecto de persianas venecianas */
+.venetian-blinds {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.blind {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.5s ease;
+}
+
+/* Estos estilos crean el efecto de persianas venecianas en la galería. 
+   Cada "persiana" es una parte de la imagen que se anima independientemente. */
+
+/* Estilos para el Carrusel de Testimonios */
+.slider-wrap {
+  height: 100%;
+  width: 100%;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  left: 50px;
+  top: 50px;
+}
+
+.slider-item {
+  width: 530px;
+  padding: 20px 0 25px 30px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  opacity: 0;
+  z-index: 0;
+  box-shadow: 0 4px 9px #f1f1f4;
+  left: 0;
+  top: 0;
+}
+
+.animation-card_image {
+  max-width: 60px;
+  max-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 9px rgba(241, 241, 244, 0.72);
+  background-color: #ffffff;
+}
+
+.animation-card_image img {
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.animation-card_content {
+  width: 100%;
+  max-width: 374px;
+  margin-left: 26px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.animation-card_content_title {
+  color: #4a4545;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -.18px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.animation-card_content_description {
+  color: #696d74;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 24px;
+  margin: 10px 0 0 0;
+}
+
+.animation-card_content_city {
+  font-size: 12px;
+  margin: 10px 0 0 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #696d74;
+}
+
+/* Estos estilos definen la apariencia del carrusel de testimonios.
+   Cada testimonio es una tarjeta que se anima para mostrarse y ocultarse. */
+
+
+/* Estilos para Acordeón */
+.accordion {
+width: 100%;
+max-width: 360px;
+margin: 30px auto;
+background: var(--item-background);
+border-radius: 4px;
+}
+
+.accordion .link {
+cursor: pointer;
+display: block;
+padding: 15px;
+color: var(--text-color);
+font-size: 14px;
+position: relative;
+transition: all 0.4s ease;
+}
+
+.accordion li i {
+position: absolute;
+top: 16px;
+left: 12px;
+font-size: 18px;
+color: var(--text-color);
+transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+right: 12px;
+left: auto;
+font-size: 16px;
+}
+
+.accordion li.open .link { color: var(--primary-color); }
+
+.accordion li.open i { color: var(--primary-color); }
+
+.submenu {
+display: none;
+background: #444359;
+font-size: 14px;
+}
+
+.submenu a {
+display: block;
+text-decoration: none;
+color: #d9d9d9;
+padding: 12px;
+padding-left: 42px;
+transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+background: var(--primary-color);
+color: #FFF;
+}
+
+/* Estos estilos crean un menú acordeón, comúnmente usado en la navegación móvil o FAQs.
+Proporciona una forma compacta de mostrar información jerárquica. */
+
+/* Estilos para el popup */
+.popup {
+display: none;
+position: fixed;
+z-index: 1001;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+background-color: var(--item-background);
+margin: 15% auto;
+padding: calc(var(--spacing-unit) * 2);
+border: 1px solid var(--primary-color);
+width: 80%;
+max-width: 600px;
+border-radius: 15px;
+position: relative;
+}
+
+.close {
+color: var(--text-color);
+float: right;
+font-size: 28px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+color: var(--primary-color);
+text-decoration: none;
+cursor: pointer;
+}
+
+/* Estos estilos definen la apariencia del popup que se muestra para información detallada.
+El fondo semitransparente y la animación suave mejoran la experiencia del usuario. */
+
+/* Estilos para las notificaciones toast */
+#toast {
+visibility: hidden;
+min-width: 250px;
+margin-left: -125px;
+background-color: var(--item-background);
+color: var(--text-color);
+text-align: center;
+border-radius: 2px;
+padding: 16px;
+position: fixed;
+z-index: 1002;
+left: 50%;
+bottom: 30px;
+}
+
+#toast.show {
+visibility: visible;
+-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+
+/* Estos estilos crean notificaciones toast que aparecen brevemente en la parte inferior de la pantalla.
+Son útiles para mostrar mensajes de confirmación o alertas no intrusivas. */
+
+/* Estilos para SugerenciasParaTi */
+.sugerencias-container {
+background-color: var(--item-background);
+border-radius: 8px;
+padding: 16px;
+margin-top: 20px;
+}
+
+.sugerencia-item {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background-color: var(--background-color);
+border-radius: 8px;
+padding: 12px;
+margin-bottom: 12px;
+}
+
+.sugerencia-info {
+display: flex;
+align-items: center;
+}
+
+.sugerencia-avatar {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+margin-right: 12px;
+}
+
+.sugerencia-nombre {
+font-weight: bold;
+color: var(--text-color);
+}
+
+.sugerencia-usuario {
+color: #888888;
+}
+
+.sugerencia-seguir {
+background-color: var(--primary-color);
+color: var(--background-color);
+border: none;
+border-radius: 20px;
+padding: 8px 16px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.sugerencia-seguir:hover {
+background-color: var(--gold);
+}
+
+/* Estos estilos definen la apariencia de la sección de sugerencias,
+que podría usarse para recomendar servicios o paquetes adicionales. */
+
+/* Estilos para ServiceCard */
+.service-card {
+background-color: var(--item-background);
+border-radius: 8px;
+overflow: hidden;
+margin-bottom: 20px;
+}
+
+.service-card-content {
+padding: 16px;
+}
+
+.service-card-title {
+font-size: 1.25rem;
+font-weight: bold;
+color: var(--primary-color);
+margin-bottom: 8px;
+}
+
+.service-card-description {
+color: var(--text-color);
+margin-bottom: 16px;
+}
+
+.service-card-benefits {
+background-color: var(--header-background);
+padding: 16px;
+}
+
+.service-card-benefits h4 {
+color: var(--primary-color);
+margin-bottom: 8px;
+}
+
+.service-card-benefits ul {
+list-style-type: none;
+padding: 0;
+}
+
+.service-card-benefits li {
+color: var(--text-color);
+margin-bottom: 4px;
+}
+
+.service-card-duration {
+background-color: var(--primary-color);
+color: var(--background-color);
+padding: 8px 16px;
+font-weight: bold;
+}
+
+.service-card-buttons {
+display: flex;
+justify-content: space-between;
+padding: 16px;
+}
+
+.service-card-button {
+padding: 8px 16px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.service-card-button-reserve {
+background-color: var(--header-background);
+color: var(--text-color);
+}
+
+.service-card-button-reserve:hover {
+background-color: var(--primary-color);
+}
+
+.service-card-button-info {
+background-color: #888888;
+color: var(--text-color);
+}
+
+.service-card-button-info:hover {
+background-color: #999999;
+}
+
+/* Estos estilos definen la apariencia de las tarjetas de servicio individuales.
+Proporcionan una presentación clara y atractiva de la información del servicio. */
+
+/* Estilos para la sección de Beneficios Destacados */
+.sugerencias-section {
+background-color: var(--item-background);
+padding: calc(var(--spacing-unit) * 2) 0;
+overflow-x: auto;
+}
+
+.sugerencias-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+min-width: 100%;
+padding: 0 var(--spacing-unit);
+}
+
+.sugerencia-item {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+padding: 0 var(--spacing-unit);
+flex: 1;
+min-width: 100px;
+}
+
+.sugerencia-icon {
+width: 40px;
+height: 40px;
+margin-bottom: var(--spacing-unit);
+}
+
+.sugerencia-item p {
+font-size: 14px;
+margin-top: var(--spacing-unit);
+white-space: nowrap;
+}
+
+/* Estos estilos crean una sección horizontal desplazable para mostrar beneficios destacados.
+Es útil para presentar características clave de manera visual y compacta. */
+
+/* Estilos para la paginación */
+.pagination-wrapper {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: calc(var(--spacing-unit) * 2);
+}
+
+.btn {
+background-color: var(--primary-color);
+color: var(--background-color);
+border: none;
+padding: calc(var(--spacing-unit) * 0.5);
+border-radius: 50%;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.btn:hover {
+background-color: var(--gold);
+}
+
+.pagination-container {
+display: flex;
+align-items: center;
+margin: 0 var(--spacing-unit);
+}
+
+.little-dot {
+width: 8px;
+height: 8px;
+background-color: var(--text-color);
+border-radius: 50%;
+margin: 0 4px;
+}
+
+.big-dot-container {
+width: 12px;
+height: 12px;
+background-color: var(--primary-color);
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.big-dot {
+width: 8px;
+height: 8px;
+background-color: var(--background-color);
+border-radius: 50%;
+}
+
+/* Estos estilos crean una paginación visual para navegar entre diferentes secciones o elementos.
+Proporciona una forma intuitiva de indicar la posición actual en una serie de elementos. */
+
+/* Estilos para el selector de categoría */
+.category-selector {
+display: flex;
+justify-content: center;
+margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.choice-chip {
+background-color: var(--item-background);
+color: var(--text-color);
+border: 2px solid var(--primary-color);
+border-radius: 20px;
+padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+margin: 0 var(--spacing-unit);
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.choice-chip.active,
+.choice-chip:hover {
+background-color: var(--primary-color);
+color: var(--background-color);
+}
+
+/* Estos estilos crean un selector de categorías con chips interactivos.
+Permiten una selección visual y táctil de diferentes categorías o opciones. */
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+.slider-item {
+width: 90%;
+left: 5%;
+}
+
+.accordion {
+width: 90%;
+}
+
+.header-top {
+flex-direction: column;
+}
+
+.services-grid, .package-grid {
+grid-template-columns: 1fr;
+}
+
+.fixed-bar .nav-text {
+display: none;
+}
+
+.checkbox-tile {
+width: 120px;
+height: 120px;
+}
+
+.sugerencias-container,
+.package-benefits {
+justify-content: flex-start;
+padding-bottom: var(--spacing-unit);
+}
+
+.sugerencia-item,
+.package-benefit-item {
+flex: 0 0 auto;
+width: 120px;
+}
+
+.main-nav {
+margin-top: var(--spacing-unit);
+}
+
+.main-nav ul {
+flex-direction: column;
+align-items: center;
+}
+
+.main-nav li {
+margin: var(--spacing-unit) 0;
+}
+
+.category-selector {
+flex-direction: column;
+align-items: center;
+}
+
+.choice-chip {
+margin: var(--spacing-unit) 0;
+}
+}

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Massage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="sticky-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/logo.png" alt="Elite Massage Logo" class="logo" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-logo.png';">
+                    <h1>Elite Massage</h1>
+                </div>
+                <div class="language-selector">
+                    <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/trad.png" alt="Traducir" id="translate-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-translate-icon.png';">
+                    <div class="language-options">
+                        <button class="lang-option" data-lang="es"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/omx.png" alt="Bandera de México" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-flag.png';"> Español</button>
+                        <button class="lang-option" data-lang="en"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/ous.png" alt="Bandera de Estados Unidos" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-flag.png';"> English</button>
+                        <button class="lang-option" data-lang="iw"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/ois.png" alt="Bandera de Israel" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-flag.png';"> עברית</button>
+                        <button class="lang-option" data-lang="fr"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/ofr.png" alt="Bandera de Francia" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-flag.png';"> Français</button>
+                        <button class="lang-option" data-lang="zh-CN"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/och.png" alt="Bandera de China" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-flag.png';"> 中文</button>
+                    </div>
+                </div>
+                <div id="google_translate_element" style="display:none;"></div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <section id="inicio" class="section hero">
+            <div class="container">
+                <h2>Bienvenido a tu Oasis de Tranquilidad</h2>
+                <p>Descubre el poder de la relajación y el bienestar en nuestro exclusivo spa de masajes.</p>
+            </div>
+        </section>
+
+        <section id="beneficios" class="section benefits">
+            <div class="container">
+                <h2>Beneficios destacados</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio1.png" alt="Reducción de estrés" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
+                        <span>Reducción de estrés</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio2.png" alt="Mejora circulación" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
+                        <span>Mejora circulación</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio3.png" alt="Alivio dolor muscular" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
+                        <span>Alivio dolor muscular</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio4.png" alt="Hidratación de la piel" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
+                        <span>Hidratación de la piel</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="section services">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
+                <div class="category-selector">
+                    <button class="choice-chip active" data-category="individual">Individual</button>
+                    <button class="choice-chip" data-category="pareja">En Pareja</button>
+                </div>
+                <div id="services-list" class="services-grid"></div>
+            </div>
+        </section>
+
+        <section id="paquetes" class="section packages">
+            <div class="container">
+                <h2>Paquetes Especiales</h2>
+                <div id="package-list"></div>
+            </div>
+        </section>
+
+        <section id="testimonios" class="section testimonials">
+            <div class="container">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <div class="testimonial">
+                    <p>"Una experiencia increíble. El masaje de aromaterapia fue justo lo que necesitaba para relajarme completamente. ¡Volveré pronto!"</p>
+                    <p class="author">- María G.</p>
+                </div>
+                <div class="testimonial">
+                    <p>"El paquete en pareja fue maravilloso. El ambiente, el servicio y los masajes superaron nuestras expectativas. Totalmente recomendado."</p>
+                    <p class="author">- Carlos y Ana</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="section gallery">
+            <div class="container">
+                <h2>Galería de Imágenes</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/copasq.JPG" alt="Interior del Spa" width="250" height="250" loading="lazy" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-image.png';">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/.JPG" alt="Evento de Masajes" width="250" height="250" loading="lazy" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-image.png';">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/noche1.JPG" alt="Productos de Spa" width="250" height="250" loading="lazy" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-image.png';">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/rosa.JPG" alt="Nuestro Equipo" width="250" height="250" loading="lazy" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-image.png';">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/lista.gif" alt="Gif 1" class="footer-gif">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/reg.gif" alt="Gif 2" class="footer-gif">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/coment.gif" alt="Gif 3" class="footer-gif">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fotos.gif" alt="Gif 4" class="footer-gif">
+            </div>
+            <p>&copy; 2023 Elite Massage. Todos los derechos reservados.</p>
+            <p><a href="/politica-privacidad">Política de Privacidad</a> | <a href="/terminos-condiciones">Términos y Condiciones</a></p>
+            <div class="social-media">
+                <a href="https://facebook.com/elitemassage" target="_blank" rel="noopener noreferrer">Facebook</a> |
+                <a href="https://instagram.com/elitemassage" target="_blank" rel="noopener noreferrer">Instagram</a> |
+                <a href="https://twitter.com/elitemassage" target="_blank" rel="noopener noreferrer">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed-bar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#servicios"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/lista.gif" alt="Icono Servicios" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Masajes</span></a></li>
+                <li><a href="#paquetes"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/reg.gif" alt="Icono Paquetes" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Paquetes</span></a></li>
+                <li><a href="#testimonios"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/coment.gif" alt="Icono Testimonios" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Testimonios</span></a></li>
+                <li><a href="#galeria"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fotos.gif" alt="Icono Galería" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Galería</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2 id="popup-title"></h2>
+            <img id="popup-image" src="" alt="Imagen del servicio" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-service-image.png';">
+            <p id="popup-description"></p>
+        </div>
+    </div>
+
+    <template id="service-template">
+        <div class="service-item">
+            <div class="service-header">
+                <img class="service-icon" alt="Icono del servicio" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
+                <h3 class="service-title"></h3>
+            </div>
+            <p class="service-description"></p>
+            <div class="benefits-container">
+                <span>Beneficios:</span>
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/benefits-icon.png" alt="Beneficios" class="benefits-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
+                <span class="service-benefits"></span>
+            </div>
+            <div class="duration-container">
+                <span>Duración:</span>
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/experiencia1.jpg" alt="Experiencia 1" class="experiencia-img">
+                        <p>"Un lugar maravilloso para desconectar del mundo. Me encantó la atención personalizada."</p>
+                        <span>- Ana G.</span>
+                    </div>
+                    <div class="experiencia-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/experiencia2.jpg" alt="Experiencia 2" class="experiencia-img">
+                        <p>"El masaje de piedras calientes fue una experiencia única. Salí sintiéndome como nueva."</p>
+                        <span>- Laura M.</span>
+                    </div>
+                    <div class="experiencia-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/experiencia3.jpg" alt="Experiencia 3" class="experiencia-img">
+                        <p>"Mis dolores musculares desaparecieron después de una sesión, me siento renovado."</p>
+                        <span>- Roberto P.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="section galeria">
+            <div class="container">
+                <h2>Galería</h2>
+                <div class="galeria-grid">
+                    <div class="galeria-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/galeria1.jpg" alt="Galería 1" class="galeria-img">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/galeria2.jpg" alt="Galería 2" class="galeria-img">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/galeria3.jpg" alt="Galería 3" class="galeria-img">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/galeria4.jpg" alt="Galería 4" class="galeria-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="section contacto">
+            <div class="container">
+                <h2>Contacto</h2>
+                <p>Estamos ubicados en el corazón de la ciudad, con fácil acceso desde cualquier punto. Visítanos en nuestra sucursal para disfrutar de una experiencia inolvidable.</p>
+                <div id="mapa" class="mapa"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/lista.gif" alt="Gif 1" class="footer-gif">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/reg.gif" alt="Gif 2" class="footer-gif">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/coment.gif" alt="Gif 3" class="footer-gif">
+                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fotos.gif" alt="Gif 4" class="footer-gif">
+            </div>
+            <p>&copy; 2023 Elite Massage. Todos los derechos reservados.</p>
+            <p><a href="/politica-privacidad">Política de Privacidad</a> | <a href="/terminos-condiciones">Términos y Condiciones</a></p>
+            <div class="social-media">
+                <a href="https://facebook.com/elitemassage" target="_blank" rel="noopener noreferrer">Facebook</a> |
+                <a href="https://instagram.com/elitemassage" target="_blank" rel="noopener noreferrer">Instagram</a> |
+                <a href="https://twitter.com/elitemassage" target="_blank" rel="noopener noreferrer">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed-bar">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#servicios"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/lista.gif" alt="Icono Servicios" class="nav-icon"><span class="nav-text">Masajes</span></a></li>
+                <li><a href="#paquetes"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/reg.gif" alt="Icono Paquetes" class="nav-icon"><span class="nav-text">Paquetes</span></a></li>
+                <li><a href="#experiencias"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/coment.gif" alt="Icono Experiencias" class="nav-icon"><span class="nav-text">Experiencias</span></a></li>
+                <li><a href="#galeria"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fotos.gif" alt="Icono Galería" class="nav-icon"><span class="nav-text">Galería</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // Configuración global
+        const CONFIG = {
+            BASE_URL: "https://raw.githubusercontent.com/elitemassagemx/Home/main/",
+            ITEMS_PER_PAGE: 3,
+            WHATSAPP_NUMBER: "5215640020305"
+        };
+
+        // Función para cargar los servicios desde data.json
+        async function cargarServicios() {
+            try {
+                const response = await fetch(`${CONFIG.BASE_URL}data.json`);
+                const data = await response.json();
+                renderizarServicios(data.servicios);
+            } catch (error) {
+                console.error("Error al cargar los servicios:", error);
+            }
+        }
+
+        // Función para renderizar servicios
+        function renderizarServicios(servicios) {
+            const servicesList = document.getElementById('services-list');
+            servicesList.innerHTML = '';
+            
+            servicios.forEach(servicio => {
+                const servicioElement = document.createElement('div');
+                servicioElement.className = 'service-item';
+                servicioElement.innerHTML = `
+                    <img src="${CONFIG.BASE_URL}${servicio.image}" alt="${servicio.title}" class="service-img">
+                    <h3>${servicio.title}</h3>
+                    <p>${servicio.description}</p>
+                    <p>Duración: ${servicio.duration}</p>
+                    <p class="price">${servicio.price}</p>
+                    <div class="service-buttons">
+                        <button onclick="reservar('${servicio.title}')">Reservar</button>
+                        <button onclick="mostrarInfo('${servicio.title}')">Más Info</button>
+                    </div>
+                `;
+                servicesList.appendChild(servicioElement);
+            });
+        }
+
+        // Función para reservar
+        function reservar(servicioTitle) {
+            const message = encodeURIComponent(`Hola! Quiero reservar un ${servicioTitle}`);
+            const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        // Función para mostrar más información
+        function mostrarInfo(servicioTitle) {
+            alert(`Más información sobre ${servicioTitle}`);
+            // Aquí podrías implementar un modal o un popup con más detalles
+        }
+
+        // Inicialización del mapa
+        function initMap() {
+            const location = { lat: 19.4326, lng: -99.1332 }; // Coordenadas de ejemplo (Ciudad de México)
+            const map = new google.maps.Map(document.getElementById('mapa'), {
+                zoom: 15,
+                center: location
+            });
+            new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+
+        // Manejo del selector de idioma
+        document.getElementById('translate-icon').addEventListener('click', function() {
+            document.querySelector('.language-options').classList.toggle('show');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                // Aquí iría la lógica para cambiar el idioma
+                console.log('Cambiando idioma a:', selectedLang);
+                document.querySelector('.language-options').classList.remove('show');
+            });
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarServicios();
+            // Otros inicializadores...
+        });
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</html>
