@@ -41,24 +41,7 @@
         <section id="beneficios" class="section benefits">
             <div class="container">
                 <h2>Beneficios destacados</h2>
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio1.png" alt="Reducción de estrés" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                        <span>Reducción de estrés</span>
-                    </div>
-                    <div class="benefit-item">
-                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio2.png" alt="Mejora circulación" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                        <span>Mejora circulación</span>
-                    </div>
-                    <div class="benefit-item">
-                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio3.png" alt="Alivio dolor muscular" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                        <span>Alivio dolor muscular</span>
-                    </div>
-                    <div class="benefit-item">
-                        <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/beneficio4.png" alt="Hidratación de la piel" class="benefit-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                        <span>Hidratación de la piel</span>
-                    </div>
-                </div>
+                <div id="beneficios-container" class="benefits-grid"></div>
             </div>
         </section>
 
@@ -70,6 +53,10 @@
                     <button class="choice-chip" data-category="pareja">En Pareja</button>
                 </div>
                 <div id="services-list" class="services-grid"></div>
+                <div class="pagination-container">
+                    <button class="btn btn--prev">Anterior</button>
+                    <button class="btn btn--next">Siguiente</button>
+                </div>
             </div>
         </section>
 
@@ -83,14 +70,7 @@
         <section id="testimonios" class="section testimonials">
             <div class="container">
                 <h2>Lo que dicen nuestros clientes</h2>
-                <div class="testimonial">
-                    <p>"Una experiencia increíble. El masaje de aromaterapia fue justo lo que necesitaba para relajarme completamente. ¡Volveré pronto!"</p>
-                    <p class="author">- María G.</p>
-                </div>
-                <div class="testimonial">
-                    <p>"El paquete en pareja fue maravilloso. El ambiente, el servicio y los masajes superaron nuestras expectativas. Totalmente recomendado."</p>
-                    <p class="author">- Carlos y Ana</p>
-                </div>
+                <div id="card-slider" class="card-slider"></div>
             </div>
         </section>
 
@@ -142,6 +122,9 @@
                 <h2>Contacto</h2>
                 <p>Estamos ubicados en el corazón de la ciudad, con fácil acceso desde cualquier punto. Visítanos en nuestra sucursal para disfrutar de una experiencia inolvidable.</p>
                 <div id="mapa" class="mapa"></div>
+                <form id="contact-form">
+                    <!-- El formulario se llenará dinámicamente con JavaScript -->
+                </form>
             </div>
         </section>
     </main>
@@ -169,7 +152,7 @@
             <ul>
                 <li><a href="#servicios"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/lista.gif" alt="Icono Servicios" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Masajes</span></a></li>
                 <li><a href="#paquetes"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/reg.gif" alt="Icono Paquetes" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Paquetes</span></a></li>
-src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Testimonios</span></a></li>
+                <li><a href="#testimonios"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/coment.gif" alt="Icono Testimonios" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Testimonios</span></a></li>
                 <li><a href="#galeria"><img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fotos.gif" alt="Icono Galería" class="nav-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';"><span class="nav-text">Galería</span></a></li>
             </ul>
         </nav>
@@ -184,124 +167,30 @@ src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-
         </div>
     </div>
 
-    <template id="service-template">
-        <div class="service-item">
-            <div class="service-header">
-                <img class="service-icon" alt="Icono del servicio" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                <h3 class="service-title"></h3>
-            </div>
-            <p class="service-description"></p>
-            <div class="benefits-container">
-                <span>Beneficios:</span>
-                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/benefits-icon.png" alt="Beneficios" class="benefits-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                <span class="service-benefits"></span>
-            </div>
-            <div class="duration-container">
-                <span>Duración:</span>
-                <img src="https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/duration-icon.png" alt="Duración" class="duration-icon" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/fallback-icon.png';">
-                <span class="service-duration"></span>
-            </div>
-            <div class="service-buttons">
-                <button class="reserve-button">Reserva ahora</button>
-                <button class="info-button">Saber más</button>
-            </div>
-        </div>
-    </template>
+    <div id="toast" class="toast">
+        <div id="img" class="toast-img">Info</div>
+        <div id="desc" class="toast-desc"></div>
+    </div>
 
-    <script>
-        // Configuración global
-        const CONFIG = {
-            BASE_URL: "https://raw.githubusercontent.com/elitemassagemx/Home/main/",
-            ITEMS_PER_PAGE: 3,
-            WHATSAPP_NUMBER: "5215640020305"
-        };
-
-        // Función para cargar los servicios desde data.json
-        async function cargarServicios() {
-            try {
-                const response = await fetch(`${CONFIG.BASE_URL}data.json`);
-                const data = await response.json();
-                renderizarServicios(data.servicios);
-            } catch (error) {
-                console.error("Error al cargar los servicios:", error);
-            }
+    <script src="script.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
         }
-
-        // Función para renderizar servicios
-        function renderizarServicios(servicios) {
-            const servicesList = document.getElementById('services-list');
-            servicesList.innerHTML = '';
-            
-            servicios.forEach(servicio => {
-                const servicioElement = document.createElement('div');
-                servicioElement.className = 'service-item';
-                servicioElement.innerHTML = `
-                    <img src="${CONFIG.BASE_URL}${servicio.image}" alt="${servicio.title}" class="service-img">
-                    <h3>${servicio.title}</h3>
-                    <p>${servicio.description}</p>
-                    <p>Duración: ${servicio.duration}</p>
-                    <p class="price">${servicio.price}</p>
-                    <div class="service-buttons">
-                        <button onclick="reservar('${servicio.title}')">Reservar</button>
-                        <button onclick="mostrarInfo('${servicio.title}')">Más Info</button>
-                    </div>
-                `;
-                servicesList.appendChild(servicioElement);
-            });
-        }
-
-        // Función para reservar
-        function reservar(servicioTitle) {
-            const message = encodeURIComponent(`Hola! Quiero reservar un ${servicioTitle}`);
-            const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${message}`;
-            window.open(url, '_blank');
-        }
-
-        // Función para mostrar más información
-        function mostrarInfo(servicioTitle) {
-            alert(`Más información sobre ${servicioTitle}`);
-            // Aquí podrías implementar un modal o un popup con más detalles
-        }
-
-        // Inicialización del mapa
-        function initMap() {
-            const location = { lat: 19.4326, lng: -99.1332 }; // Coordenadas de ejemplo (Ciudad de México)
-            const map = new google.maps.Map(document.getElementById('mapa'), {
-                zoom: 15,
-                center: location
-            });
-            new google.maps.Marker({
-                position: location,
-                map: map
-            });
-        }
-
-        // Manejo del selector de idioma
-        document.getElementById('translate-icon').addEventListener('click', function() {
-            document.querySelector('.language-options').classList.toggle('show');
-        });
-
-        document.querySelectorAll('.lang-option').forEach(button => {
-            button.addEventListener('click', function() {
-                const selectedLang = this.getAttribute('data-lang');
-                // Aquí iría la lógica para cambiar el idioma
-                console.log('Cambiando idioma a:', selectedLang);
-                document.querySelector('.language-options').classList.remove('show');
-            });
-        });
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            cargarServicios();
-            // Otros inicializadores...
-        });
     </script>
+<div id="toast" class="toast">
+        <div id="img" class="toast-img">Info</div>
+        <div id="desc" class="toast-desc"></div>
+    </div>
+
+    <script src="script.js"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </body>
 </html>
