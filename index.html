@@ -6,6 +6,7 @@
     <title>Elite Massage</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header id="sticky-header">
@@ -29,6 +30,16 @@
             </div>
         </div>
     </header>
+
+    <!-- Barra de Navegación (Daily UI) -->
+    <nav class="daily-ui-nav">
+        <ul>
+            <li><a href="#vip-experiences">VIP Experiences</a></li>
+            <li><a href="#elige">Elige</a></li>
+            <li><a href="#planea">Planea</a></li>
+            <li><a href="#test">Test</a></li>
+        </ul>
+    </nav>
 
     <main role="main">
         <section id="inicio" class="section hero">
@@ -64,6 +75,68 @@
             <div class="container">
                 <h2>Paquetes Especiales</h2>
                 <div id="package-list"></div>
+            </div>
+        </section>
+
+        <!-- Sección de Checkbox Elige -->
+        <section id="elige" class="section elige">
+            <div class="container">
+                <h2>Elige tu Experiencia</h2>
+                <div class="checkbox-group">
+                    <!-- Los checkboxes se llenarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Planea tu Experiencia -->
+        <section id="planea" class="section planea">
+            <div class="container">
+                <h2>Planea tu Experiencia</h2>
+                <p>¿Tienes una idea para un evento especial? ¡Cuéntanos y lo haremos realidad!</p>
+                <form id="planea-form">
+                    <textarea placeholder="Describe tu idea para un evento especial..."></textarea>
+                    <button type="submit">Enviar Idea</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Sección Test (Open Relax 1 & 2) -->
+        <section id="test" class="section test">
+            <div class="container">
+                <h2>Test de Experiencias</h2>
+                <div class="test-container">
+                    <div class="test-option">
+                        <h3>Open Relax 1</h3>
+                        <!-- Contenido de Open Relax 1 -->
+                    </div>
+                    <div class="test-option">
+                        <h3>Open Relax 2</h3>
+                        <!-- Contenido de Open Relax 2 -->
+                    </div>
+                </div>
+                <p>Elige tu opción preferida y envíanos tu elección:</p>
+                <form id="test-form">
+                    <input type="text" placeholder="Nombre" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="tel" placeholder="Teléfono" required>
+                    <select required>
+                        <option value="">Selecciona tu preferencia</option>
+                        <option value="open-relax-1">Open Relax 1</option>
+                        <option value="open-relax-2">Open Relax 2</option>
+                    </select>
+                    <button type="submit">Enviar Preferencia</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Sección Imágenes Venetian -->
+        <section id="venetian" class="section venetian">
+            <div class="container">
+                <h2>Experiencia Venetian</h2>
+                <div class="venetian-blinds">
+                    <!-- Las imágenes se cargarán dinámicamente con JavaScript -->
+                </div>
+                <button id="finalizar-venetian">Finalizar</button>
             </div>
         </section>
 
@@ -116,7 +189,7 @@
                 </div>
             </div>
         </section>
-
+      
         <section id="contacto" class="section contacto">
             <div class="container">
                 <h2>Contacto</h2>
@@ -178,19 +251,7 @@
             new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
         }
     </script>
-<div id="toast" class="toast">
-        <div id="img" class="toast-img">Info</div>
-        <div id="desc" class="toast-desc"></div>
-    </div>
-
-    <script src="script.js"></script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-    </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </body>
 </html>
