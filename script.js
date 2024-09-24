@@ -1,3 +1,5 @@
+// @ts-nocheck
+// La línea anterior desactiva la comprobación de tipos de TypeScript para este archivo
 
 // Configuración global
 const CONFIG = {
@@ -6,16 +8,6 @@ const CONFIG = {
     WHATSAPP_NUMBER: "5215640020305",
     DATA_URL: "https://raw.githubusercontent.com/elitemassagemx/full/main/data.json"
 };
-
-// Importar todos los scripts individuales
-import './script.js';
-import './services.js';
-import './packages.js';
-import './experiences.js';
-import './testimonials.js';
-import './contact.js';
-import './popup.js';
-import './toast.js';
 
 // Estado global de la aplicación
 class AppState {
@@ -45,67 +37,6 @@ class AppState {
 
 const state = new AppState();
 
-// Clase base para componentes
-class Component {
-    constructor(props = {}) {
-        this.props = props;
-        this.state = {};
-    }
-
-    setState(newState) {
-        this.state = { ...this.state, ...newState };
-        this.render();
-    }
-
-    render() {
-        throw new Error('El método render debe ser implementado');
-    }
-}
-
-// Componente SugerenciasParaTi (transferido del documento 1)
-class SugerenciasParaTi extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sugerencias: [
-                { nombre: 'Mary Aguilar', usuario: 'maryaguilar0', imagen: 'https://via.placeholder.com/100' },
-                { nombre: 'Vanessa Villeg...', usuario: 'vanahi19', imagen: 'https://via.placeholder.com/100' },
-            ]
-        };
-    }
-
-    seguirUsuario(usuario) {
-        console.log(`Siguiendo a ${usuario}`);
-        // Aquí iría la lógica para seguir al usuario
-    }
-
-    render() {
-        const container = Utils.createElement('div', 'sugerencias-container');
-        
-        const title = Utils.createElement('h2', '', 'Sugerencias para ti');
-        container.appendChild(title);
-
-        this.state.sugerencias.forEach(sugerencia => {
-            const item = Utils.createElement('div', 'sugerencia-item');
-            item.innerHTML = `
-                <div class="sugerencia-info">
-                    <img src="${sugerencia.imagen}" alt="${sugerencia.nombre}" class="sugerencia-avatar">
-                    <div>
-                        <div class="sugerencia-nombre">${sugerencia.nombre}</div>
-                        <div class="sugerencia-usuario">${sugerencia.usuario}</div>
-                    </div>
-                </div>
-                <button class="sugerencia-seguir">Seguir</button>
-            `;
-            const seguirButton = item.querySelector('.sugerencia-seguir');
-            seguirButton.addEventListener('click', () => this.seguirUsuario(sugerencia.usuario));
-            container.appendChild(item);
-        });
-
-        return container;
-    }
-}
-
 // Módulo de Utilidades
 const Utils = {
     createElement: (tag, className, innerHTML) => {
@@ -117,9 +48,14 @@ const Utils = {
     
     showNotification: (message) => {
         const toast = document.getElementById('toast');
-        toast.querySelector('#desc').textContent = message;
-        toast.className = 'show';
-        setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 5000);
+        if (toast) {
+            const descElement = toast.querySelector('#desc');
+            if (descElement) {
+                descElement.textContent = message;
+            }
+            toast.className = 'show';
+            setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 5000);
+        }
     }
 };
 
@@ -177,9 +113,9 @@ const BeneficiosModule = {
 };
 
 // Componente ServiceCard
-class ServiceCard extends Component {
+class ServiceCard {
     constructor(props) {
-        super(props);
+        this.props = props;
     }
 
     reservar() {
@@ -213,10 +149,14 @@ class ServiceCard extends Component {
         `;
 
         const reserveButton = card.querySelector('.service-card-button-reserve');
-        reserveButton.addEventListener('click', () => this.reservar());
+        if (reserveButton) {
+            reserveButton.addEventListener('click', () => this.reservar());
+        }
 
         const infoButton = card.querySelector('.service-card-button-info');
-        infoButton.addEventListener('click', () => this.mostrarInfo());
+        if (infoButton) {
+            infoButton.addEventListener('click', () => this.mostrarInfo());
+        }
 
         return card;
     }
@@ -258,33 +198,19 @@ const ServicesModule = {
         PaginationModule.updatePagination();
     },
 
-    renderServicesFromData: (services) => {
-        const servicesContainer = document.getElementById('services');
-        if (servicesContainer) {
-            Object.entries(services).forEach(([category, categoryServices]) => {
-                if (category !== 'paquetes') {
-                    categoryServices.forEach(service => {
-                        const div = Utils.createElement('div');
-                        div.textContent = `${service.title}: ${service.description}`;
-                        servicesContainer.appendChild(div);
-                    });
-                }
-            });
-        }
-    },
-
     init: () => {
         ServicesModule.loadServices();
         const categorySelector = document.querySelector('.category-selector');
         if (categorySelector) {
             categorySelector.addEventListener('click', (e) => {
-                if (e.target.classList.contains('choice-chip')) {
+                const target = e.target;
+                if (target instanceof HTMLElement && target.classList.contains('choice-chip')) {
                     state.setState({
-                        currentCategory: e.target.dataset.category,
+                        currentCategory: target.dataset.category || '',
                         currentPage: 1
                     });
                     document.querySelectorAll('.choice-chip').forEach(chip => chip.classList.remove('active'));
-                    e.target.classList.add('active');
+                    target.classList.add('active');
                     ServicesModule.renderServices();
                 }
             });
@@ -304,25 +230,6 @@ const PackagesModule = {
         });
     },
 
-    renderPackagesFromData: (packages) => {
-        const packagesContainer = document.getElementById('packages');
-        const packageBenefitsContainer = document.getElementById('package-benefits');
-        
-        if (packagesContainer && packageBenefitsContainer) {
-            packages.forEach(pkg => {
-                const div = Utils.createElement('div');
-                div.textContent = pkg.title;
-                packagesContainer.appendChild(div);
-
-                pkg.benefits.forEach(benefit => {
-                    const benefitDiv = Utils.createElement('div');
-                    benefitDiv.textContent = benefit;
-                    packageBenefitsContainer.appendChild(benefitDiv);
-                });
-            });
-        }
-    },
-
     init: () => {
         PackagesModule.renderPackages();
     }
@@ -333,7 +240,7 @@ const UIModule = {
     showPopup: (data) => {
         const popup = document.getElementById('popup');
         const popupTitle = document.getElementById('popup-title');
-        const popupImage = document.getElementById('popup-image');
+        const popupImage = document.getElementById('popup-image') as HTMLImageElement;
         const popupDescription = document.getElementById('popup-description');
 
         if (!popup || !popupTitle || !popupImage || !popupDescription) return;
@@ -348,14 +255,17 @@ const UIModule = {
     },
 
     createVenetianBlinds: () => {
-        const venetianContainer = document.getElementById('venetian-container');
+        const venetianContainer = document.querySelector('.venetian-blinds');
         if (!venetianContainer) return;
-        const image = `${CONFIG.BASE_URL}copas.JPG`;
+        const image1 = `${CONFIG.BASE_URL}copas.JPG`;
+        const image2 = `${CONFIG.BASE_URL}noche1.JPG`;
         
         for (let i = 0; i < 10; i++) {
             const blind = Utils.createElement('div', 'blind');
-            blind.style.backgroundImage = `url(${image})`;
             blind.style.left = `${i * 10}%`;
+            blind.style.width = '10%';
+            blind.style.backgroundImage = `url(${i % 2 === 0 ? image1 : image2})`;
+            blind.style.backgroundPosition = `${-i * 100}% 0`;
             
             blind.addEventListener('mouseover', () => {
                 blind.style.transform = 'scaleY(1.1)';
@@ -401,7 +311,8 @@ const UIModule = {
         const accordionToggle = Utils.createElement('button', 'accordion-button', 'Menú <i class="fas fa-chevron-down"></i>');
         accordionToggle.id = 'accordion-toggle';
         
-       accordionContent.id = 'accordion-content';
+        const accordionContent = Utils.createElement('div', 'accordion-content');
+        accordionContent.id = 'accordion-content';
         const mainNav = document.querySelector('.main-nav');
         if (mainNav) {
             accordionContent.innerHTML = mainNav.innerHTML;
@@ -412,44 +323,25 @@ const UIModule = {
 
         accordionToggle.addEventListener('click', function() {
             this.classList.toggle('active');
-            accordionContent.style.display = accordionContent.style.display === 'block' ? 'none' : 'block';
+            if (accordionContent instanceof HTMLElement) {
+                accordionContent.style.display = accordionContent.style.display === 'block' ? 'none' : 'block';
+            }
         });
     },
 
     initializeGallery: () => {
         const galleryItems = document.querySelectorAll('.gallery-grid img');
         galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                UIModule.showPopup({
-                    title: item.alt,
-                    image: item.src,
-                    description: 'Descripción de la imagen de la galería'
+            if (item instanceof HTMLImageElement) {
+                item.addEventListener('click', () => {
+                    UIModule.showPopup({
+                        title: item.alt,
+                        image: item.src,
+                        description: 'Descripción de la imagen de la galería'
+                    });
                 });
-            });
+            }
         });
-    },
-
-    setupBenefitsTitle: () => {
-        const benefitsContainer = document.getElementById('benefits');
-        if (benefitsContainer) {
-            benefitsContainer.textContent = 'Beneficios destacados';
-        }
-    },
-
-    setupWelcomeMessage: () => {
-        const welcomeContainer = document.getElementById('welcome');
-        if (welcomeContainer) {
-            welcomeContainer.textContent = 'Bienvenido a tu oasis';
-        }
-    },
-
-    setupVenetianBlind: () => {
-        const venetianContainer = document.getElementById('venetian');
-        if (venetianContainer) {
-            const venetianDiv = Utils.createElement('div');
-            venetianDiv.textContent = 'Venetian';
-            venetianContainer.appendChild(venetianDiv);
-        }
     },
 
     init: () => {
@@ -457,14 +349,11 @@ const UIModule = {
         UIModule.createExperienceCheckboxes();
         UIModule.setupAccordion();
         UIModule.initializeGallery();
-        UIModule.setupBenefitsTitle();
-        UIModule.setupWelcomeMessage();
-        UIModule.setupVenetianBlind();
         const closeButton = document.querySelector('.close');
         if (closeButton) {
             closeButton.addEventListener('click', () => {
                 const popup = document.getElementById('popup');
-                if (popup) popup.style.display = 'none';
+                if (popup instanceof HTMLElement) popup.style.display = 'none';
             });
         }
     }
@@ -501,37 +390,6 @@ const PaginationModule = {
     }
 };
 
-// Componente FixedBottomBar
-class FixedBottomBar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: [
-                { href: '#home', icon: 'home', text: 'Inicio' },
-                { href: '#services', icon: 'list', text: 'Servicios' },
-                { href: '#contact', icon: 'envelope', text: 'Contacto' }
-            ]
-        };
-    }
-
-    render() {
-        const bar = Utils.createElement('nav', 'fixed-bottom-bar');
-        bar.innerHTML = `
-            <ul>
-                ${this.state.items.map(item => `
-                    <li>
-                        <a href="${item.href}">
-                            <i class="fas fa-${item.icon}"></i>
-                            <span>${item.text}</span>
-                        </a>
-                    </li>
-                `).join('')}
-            </ul>
-        `;
-        return bar;
-    }
-}
-
 // Módulo de Internacionalización
 const I18nModule = {
     initLanguageSelector: () => {
@@ -540,14 +398,23 @@ const I18nModule = {
 
         if (translateIcon && languageOptions) {
             translateIcon.addEventListener('click', () => {
-                languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+                if (languageOptions instanceof HTMLElement) {
+                    languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+                }
             });
 
             document.querySelectorAll('.lang-option').forEach(option => {
                 option.addEventListener('click', (e) => {
-                    const lang = e.currentTarget.dataset.lang;
-                    I18nModule.changeLanguage(lang);
-                    languageOptions.style.display = 'none';
+                    const target = e.currentTarget;
+                    if (target instanceof HTMLElement) {
+                        const lang = target.dataset.lang;
+                        if (lang) {
+                            I18nModule.changeLanguage(lang);
+                        }
+                        if (languageOptions instanceof HTMLElement) {
+                            languageOptions.style.display = 'none';
+                        }
+                    }
                 });
             });
         }
@@ -605,10 +472,92 @@ const TestimonialsModule = {
         
         let currentIndex = 0;
         setInterval(() => {
-            cards[currentIndex].style.opacity = '0';
+            if (cards[currentIndex] instanceof HTMLElement) {
+                cards[currentIndex].style.opacity = '0';
+            }
             currentIndex = (currentIndex + 1) % cards.length;
-            cards[currentIndex].style.opacity = '1';
+            if (cards[currentIndex] instanceof HTMLElement) {
+                cards[currentIndex].style.opacity = '1';
+            }
         }, 3000);
+    }
+};
+
+// Módulo de Experiencias
+const ExperiencesModule = {
+    setupEligeSection: () => {
+        const eligeForm = document.querySelector('#elige .checkbox-group');
+        if (eligeForm) {
+            eligeForm.addEventListener('change', (e) => {
+                const target = e.target;
+                if (target instanceof HTMLInputElement && target.type === 'checkbox') {
+                    const checkedBoxes = eligeForm.querySelectorAll('input[type="checkbox"]:checked');
+                    if (checkedBoxes.length > 3) {
+                        target.checked = false;
+                        Utils.showNotification('Puedes seleccionar hasta 3 experiencias.');
+                    }
+                }
+            });
+        }
+    },
+
+    setupPlaneaSection: () => {
+        const planeaForm = document.getElementById('planea-form');
+        if (planeaForm) {
+            planeaForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const textarea = planeaForm.querySelector('textarea');
+                if (textarea instanceof HTMLTextAreaElement) {
+                    const idea = textarea.value;
+                    if (idea.trim()) {
+                        Utils.showNotification('¡Gracias por compartir tu idea! Nos pondremos en contacto contigo pronto.');
+                        planeaForm.reset();
+                    } else {
+                        Utils.showNotification('Por favor, describe tu idea antes de enviar.');
+                    }
+                }
+            });
+        }
+    },
+
+    setupTestSection: () => {
+        const testForm = document.getElementById('test-form');
+        if (testForm) {
+            testForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                Utils.showNotification('Gracias por tu preferencia. Te contactaremos pronto.');
+                testForm.reset();
+                ExperiencesModule.showVenetianSection();
+            });
+        }
+    },
+
+    showVenetianSection: () => {
+        const venetianSection = document.getElementById('venetian');
+        if (venetianSection) {
+            venetianSection.style.display = 'block';
+            window.scrollTo({
+                top: venetianSection.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    },
+
+    setupVenetianSection: () => {
+        const finalizarButton = document.getElementById('finalizar-venetian');
+        if (finalizarButton) {
+            finalizarButton.addEventListener('click', () => {
+                Utils.showNotification('¡Gracias por completar la experiencia!');
+                // Aquí puedes añadir más lógica para finalizar la experiencia
+            });
+        }
+    },
+
+    init: () => {
+        ExperiencesModule.setupEligeSection();
+        ExperiencesModule.setupPlaneaSection();
+        ExperiencesModule.setupTestSection();
+        ExperiencesModule.setupVenetianSection();
     }
 };
 
@@ -623,33 +572,27 @@ function init() {
         CommunicationModule.setupContactForm();
         I18nModule.initLanguageSelector();
         TestimonialsModule.setupTestimonialCarousel();
-
-        // Renderizar SugerenciasParaTi
-        const sugerenciasContainer = document.getElementById('sugerencias-container');
-        if (sugerenciasContainer) {
-            const sugerenciasComponent = new SugerenciasParaTi();
-            sugerenciasContainer.appendChild(sugerenciasComponent.render());
-        }
-
-        // Renderizar FixedBottomBar
-        const bottomBar = new FixedBottomBar();
-        document.body.appendChild(bottomBar.render());
+        ExperiencesModule.init();
 
         // Habilitar el contenedor sticky
-        const stickyContainer = document.getElementById('sticky');
-        if (stickyContainer) {
-            stickyContainer.style.display = 'block';
+        const stickyContainer = document.getElementById('sticky-header');
+        if (stickyContainer instanceof HTMLElement) {
+            stickyContainer.style.position = 'sticky';
+            stickyContainer.style.top = '0';
         }
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                const href = this.getAttribute('href');
+                if (href) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
@@ -676,15 +619,17 @@ var Accordion = function(el, multiple) {
 Accordion.prototype.dropdown = function(e) {
     var $this = e.target;
     var $next = $this.nextElementSibling;
-    $next.style.display = $next.style.display === 'block' ? 'none' : 'block';
-    $this.parentNode.classList.toggle('open');
+    if ($next instanceof HTMLElement) {
+        $next.style.display = $next.style.display === 'block' ? 'none' : 'block';
+    }
+    $this.parentNode?.classList.toggle('open');
     if (!this.multiple) {
         var $el = this.el;
         var $submenu = $el.querySelectorAll('.submenu');
         $submenu.forEach(sub => {
-            if (sub !== $next) {
+            if (sub !== $next && sub instanceof HTMLElement) {
                 sub.style.display = 'none';
-                sub.parentNode.classList.remove('open');
+                sub.parentNode?.classList.remove('open');
             }
         });
     }
@@ -698,9 +643,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Función para manejar el efecto de galería
 function styles(item_id, x, y, z, opacity, shadow) {
     const item = document.querySelector(item_id);
-    if (item) {
+    if (item instanceof HTMLElement) {
         item.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
-        item.style.opacity = opacity;
+        item.style.opacity = opacity.toString();
         item.style.boxShadow = shadow;
     }
 }
